@@ -31,7 +31,7 @@ type SetTextEditProperties = dyn FnOnce(TextEdit) -> TextEdit;
 /// An extension to the [`egui::TextEdit`] that allows for a dropdown box with autocomplete to popup while typing.
 pub struct AutoCompleteTextEdit<'a, T> {
     /// Contents of text edit passed into [`egui::TextEdit`]
-    text_field: &'a mut String,
+    text_field: &'a mut dyn TextBuffer,
     /// Data to use as the search term
     search: T,
     /// A limit that can be placed on the maximum number of autocomplete suggestions shown
@@ -51,7 +51,7 @@ where
     ///
     /// `text_field` - Contents of the text edit passed into [`egui::TextEdit`]
     /// `search` - Data use as the search term
-    pub fn new(text_field: &'a mut String, search: T) -> Self {
+    pub fn new(text_field: &'a mut dyn TextBuffer, search: T) -> Self {
         Self {
             text_field,
             search,
